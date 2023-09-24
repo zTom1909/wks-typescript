@@ -1,7 +1,8 @@
 function suma(a: number, b: string): string;
 function suma(a: string, b: string): string;
 function suma(a: string, b: number): string;
-function suma(a: number, b: number): number {
+function suma(a: number, b: number): number;
+function suma(a: any, b: any): number | string {
     return a + b;
 }
 
