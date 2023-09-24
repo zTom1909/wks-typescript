@@ -8,10 +8,14 @@ import {
 } from "sequelize-typescript";
 @Table
 class User extends Model<User> {
-  @Column
+  @Column({
+    allowNull: false
+  })
   name!: string;
 
-  @Column
+  @Column({
+    allowNull: false
+  })
   lastName!: string;
 
   @CreatedAt

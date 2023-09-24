@@ -4,18 +4,26 @@ import { User } from "../db";
 const router = Router();
 
 router.get("/", async (req: Request, res: Response) => {
-  const users = await User.findAll();
-  res.json(users);
+  try {
+    const users = await User.findAll();
+    res.json(users);
+  } catch (error) {
+    res.status(400).json({ error: (error as Error).message })
+  }
 });
 
 router.post("/", async (req: Request, res: Response) => {
-  interface Userdata {
-    name: string;
-    lastName: string;
+  try {
+    interface Userdata {
+      name: string;
+      lastName: string;
+    }
+    const { name, lastName }: Userdata = req.body;
+    const newUser = await User.create({ name, lastName });
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(400).json({ error: (error as Error).message })
   }
-  const { name, lastName }: Userdata = req.body;
-  const newUser = await User.create({ name, lastName });
-  res.json(newUser);
 });
 
 export default router;
